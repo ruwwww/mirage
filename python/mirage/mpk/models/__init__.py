@@ -1,6 +1,8 @@
 import importlib
 from pathlib import Path
 
+from .anima import AnimaBuilder as AnimaBuilder
+
 package_dir = Path(__file__).parent
 
 for path in package_dir.rglob("builder.py"):
