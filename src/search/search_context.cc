@@ -16,6 +16,7 @@ void from_json(json const &j, SearchContext &c) {
           }
         }
       }
+      return std::make_pair(size_t(0), size_t(0));
     };
 
     c.tb_graph = std::make_shared<threadblock::Graph>();
@@ -31,7 +32,15 @@ void from_json(json const &j, SearchContext &c) {
       }
     }
   }
-  from_json(j.at("level"), c.level);
+  c.level = j.at("level").get<SearchLevel>();
+}
+
+void to_json(json &j, SearchLevel const &level) {
+  j = static_cast<int>(level);
+}
+
+void from_json(json const &j, SearchLevel &level) {
+  level = static_cast<SearchLevel>(j.get<int>());
 }
 
 void to_json(json &j, SearchContext const &c) {
